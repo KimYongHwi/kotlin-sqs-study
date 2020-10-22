@@ -29,12 +29,13 @@ noArg {
 }
 
 dependencies {
-	implementation (platform("software.amazon.awssdk:bom:2.15.7"))
+	implementation(platform("software.amazon.awssdk:bom:2.15.7"))
 	implementation("software.amazon.awssdk:sqs")
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws-messaging:2.2.4.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis:2.3.4.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 
 	implementation("au.com.console:kassava:2.0.0")
