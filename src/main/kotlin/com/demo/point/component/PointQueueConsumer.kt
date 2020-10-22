@@ -21,9 +21,16 @@ class PointQueueConsumer(
 		try {
 			val point = Point(null, dto.memberId, dto.point, dto.sign, dto.code, dto.expiredAt)
 			val memberPoint: MemberPoint = memberPointCacheRepository.findById(dto.memberId).orElse(MemberPoint(dto.memberId, 0))
+			val totalPoint: Int = when (dto.sign) {
+				"+" -> dto.point + memberPoint.totalPoint
+				else -> {
+					if (memberPoint.totalPoint == 0) 0
+					else memberPoint.totalPoint - dto.point
+				}
+			}
 
 			pointRepository.save(point)
-			memberPointCacheRepository.save(MemberPoint(dto.memberId, dto.point + memberPoint.totalPoint))
+			memberPointCacheRepository.save(MemberPoint(dto.memberId, totalPoint))
 		} catch (e: Exception) {
 			println(e)
 		}
